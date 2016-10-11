@@ -5,6 +5,7 @@ one:
   age: 1
   email: MyString
   mobile: MyString
+  description: MyText
   city: MyString
   country: MyString
 
@@ -13,5 +14,6 @@ two:
   age: 1
   email: MyString
   mobile: MyString
+  description: MyText
   city: MyString
   country: MyString
