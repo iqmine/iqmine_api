@@ -22,3 +22,12 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+# To run swagger
+
+# Download zip file from https://github.com/swagger-api/swagger-ui
+
+# Open 'swagger-ui-master/dist/index.html'
+
+# Type 'http://localhost:3000/api/v1/swagger_doc' on swagger box and that's it.
