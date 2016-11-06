@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161024083803) do
+ActiveRecord::Schema.define(version: 20161106112341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,10 +88,10 @@ ActiveRecord::Schema.define(version: 20161024083803) do
     t.string   "title"
     t.text     "description"
     t.boolean  "is_open"
-    t.integer  "category_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["category_id"], name: "index_questions_on_category_id", using: :btree
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "sub_category_id"
+    t.index ["sub_category_id"], name: "index_questions_on_sub_category_id", using: :btree
     t.index ["user_id"], name: "index_questions_on_user_id", using: :btree
   end
 
@@ -135,7 +135,6 @@ ActiveRecord::Schema.define(version: 20161024083803) do
   add_foreign_key "answers", "users"
   add_foreign_key "question_tags", "questions"
   add_foreign_key "question_tags", "tags"
-  add_foreign_key "questions", "categories"
   add_foreign_key "questions", "users"
   add_foreign_key "sub_categories", "categories"
 end
