@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161106112341) do
+ActiveRecord::Schema.define(version: 20161113122636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,13 @@ ActiveRecord::Schema.define(version: 20161106112341) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "common_configs", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "value",      limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "question_tags", force: :cascade do |t|
     t.integer  "question_id"
     t.integer  "tag_id"
@@ -88,11 +95,21 @@ ActiveRecord::Schema.define(version: 20161106112341) do
     t.string   "title"
     t.text     "description"
     t.boolean  "is_open"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.integer  "sub_category_id"
+    t.boolean  "is_active",       default: true
     t.index ["sub_category_id"], name: "index_questions_on_sub_category_id", using: :btree
     t.index ["user_id"], name: "index_questions_on_user_id", using: :btree
+  end
+
+  create_table "rewards", force: :cascade do |t|
+    t.string   "task",       limit: 255
+    t.string   "action",     limit: 255
+    t.integer  "points"
+    t.boolean  "is_active",              default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "sub_categories", force: :cascade do |t|
@@ -107,6 +124,15 @@ ActiveRecord::Schema.define(version: 20161106112341) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_rewards", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "rewards_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["rewards_id"], name: "index_user_rewards_on_rewards_id", using: :btree
+    t.index ["user_id"], name: "index_user_rewards_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -124,6 +150,7 @@ ActiveRecord::Schema.define(version: 20161106112341) do
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.string   "authentication_token"
+    t.integer  "rewards",                default: 0
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

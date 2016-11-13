@@ -9,6 +9,7 @@ module API
       expose :name
       expose :age
       expose :mobile
+      expose :rewards
       expose :authentication_token, :as=>:access_token
     end
 
@@ -19,6 +20,7 @@ module API
       expose :is_open
       expose :sub_category_id
       expose :user_id
+      expose :is_active
     end
 
   end

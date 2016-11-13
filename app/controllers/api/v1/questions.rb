@@ -45,6 +45,10 @@ module API
         post "Add a Question" do
           question = Question.new(question_params(params))
           if question.valid? && question.save
+            rewards = Rewards.where(:task=>'Question', :action=>"Create").last
+            user = question.user
+            UserRewards.create(:rewards_id=>rewards.id, :user_id=>user.id)
+            question.user.update(:rewards=>user.rewards.to_i + rewards.points)
             status 201
             { status: 'success', message: 'Question added successfully'}
           else
