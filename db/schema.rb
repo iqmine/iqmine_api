@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161113122636) do
+ActiveRecord::Schema.define(version: 20161120122659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,24 @@ ActiveRecord::Schema.define(version: 20161113122636) do
     t.datetime "updated_at"
   end
 
+  create_table "privileges", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
+    t.integer  "points"
+    t.boolean  "is_active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "question_spams", force: :cascade do |t|
+    t.integer  "question_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["question_id"], name: "index_question_spams_on_question_id", using: :btree
+    t.index ["user_id"], name: "index_question_spams_on_user_id", using: :btree
+  end
+
   create_table "question_tags", force: :cascade do |t|
     t.integer  "question_id"
     t.integer  "tag_id"
@@ -95,10 +113,11 @@ ActiveRecord::Schema.define(version: 20161113122636) do
     t.string   "title"
     t.text     "description"
     t.boolean  "is_open"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "sub_category_id"
     t.boolean  "is_active",       default: true
+    t.boolean  "is_spam",         default: false
     t.index ["sub_category_id"], name: "index_questions_on_sub_category_id", using: :btree
     t.index ["user_id"], name: "index_questions_on_user_id", using: :btree
   end
@@ -160,6 +179,8 @@ ActiveRecord::Schema.define(version: 20161113122636) do
   add_foreign_key "accepted_answers", "users"
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
+  add_foreign_key "question_spams", "questions"
+  add_foreign_key "question_spams", "users"
   add_foreign_key "question_tags", "questions"
   add_foreign_key "question_tags", "tags"
   add_foreign_key "questions", "users"

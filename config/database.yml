@@ -29,7 +29,7 @@ test:
 
 production:
   <<: *default
-  database: iqmine_development
-  username: selvakumar
-  password: iqmine
+  database: qnahunt_production
+  username: qnahunt
+  password: selva_kalish_2016
   host: localhost
