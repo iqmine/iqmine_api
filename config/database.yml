@@ -27,9 +27,9 @@ test:
   password: iqmine
   host: localhost
 
-prodcution:
+production:
   <<: *default
   database: qnahunt_production
   username: qnahunt
   password: selva_kalish_2016
-  host: postgresql-solid-12149
+  host: postgresql-colorful-99654
