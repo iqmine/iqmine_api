@@ -204,7 +204,6 @@ DEPENDENCIES
   grape-swagger
   grape-swagger-entity
   grape-swagger-representable
-  jsonapi-parser (~> 0.1.1.beta2)
   listen (~> 3.0.5)
   pg
   puma (~> 3.0)
@@ -213,6 +212,9 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
+
+RUBY VERSION
+   ruby 2.3.0p0
 
 BUNDLED WITH
    1.13.2
