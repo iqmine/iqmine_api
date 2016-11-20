@@ -11,6 +11,7 @@ gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'pg'
 gem 'devise'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'grape'
 # Use Puma as the app server
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -30,7 +31,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'puma', '~> 3.0'
-  gem 'grape'
+
   gem 'grape-active_model_serializers'
 
   gem 'grape-swagger'
