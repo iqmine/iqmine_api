@@ -12,6 +12,7 @@ gem 'pg'
 gem 'devise'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'grape'
+gem 'grape-swagger'
 # Use Puma as the app server
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -34,7 +35,7 @@ group :development, :test do
 
   gem 'grape-active_model_serializers'
 
-  gem 'grape-swagger'
+
 # For Grape::Entity ( https://github.com/ruby-grape/grape-entity )
   gem 'grape-swagger-entity'
 # For representable ( https://github.com/apotonick/representable )
