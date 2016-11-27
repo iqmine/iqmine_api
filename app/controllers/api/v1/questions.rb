@@ -57,6 +57,34 @@ module API
           end
         end
 
+        desc "Edit a Question"
+        params do
+          group :question, type: Hash do
+            requires :id
+            requires :title, type: String, allow_blank: false, desc: "Question title"
+            requires :description, type: String, allow_blank: false, desc: "Description of a question"
+            requires :user_id, type: Integer
+            requires :sub_category_id, type: Integer
+            requires :is_open, type: Boolean
+          end
+        end
+
+        put "Edit a Question" do
+          question = Question.find(params[:question][:id])
+          question.update(question_params(params))
+          if question.valid? && question.save
+            rewards = Rewards.where(:task=>'Question', :action=>"Update").last
+            user = question.user
+            UserRewards.create(:rewards_id=>rewards.id, :user_id=>user.id)
+            question.user.update(:rewards=>user.rewards.to_i + rewards.points)
+            status 200
+            { status: 'success', message: 'Question modified successfully'}
+          else
+            error!({status: "failure", message: "#{question.errors.first[0].capitalize} #{question.errors.first[1]}" },
+                   422)
+          end
+        end
+
 
 
       end
